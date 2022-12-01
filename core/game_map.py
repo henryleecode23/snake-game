@@ -23,5 +23,8 @@ class GameMap():
                     continue
                 self.table[i][j]-=1
         # print()
+    
+    def reset(self):
+        self.table = [[0 for _ in range(self.size)] for _ in range(self.size)]
 
     
