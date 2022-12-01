@@ -12,24 +12,16 @@ class GameMap():
         self.size = size
         self.table = [[0 for _ in range(size)] for _ in range(size)]
         self._startPoint = startPoint if between(startPoint[0], 0, size) and between(startPoint[1], 0, size) else (floor(size/2), floor(size/2))
-    
-    @property
-    def startPoint(self):
-        return self._startPoint
-    
-    @startPoint.setter
-    def startPoint(self, Point:Tuple[int, int]):
-        x, y = Point[0], Point[1] 
-        if ( x < 0 or y < 0 or x > self.size or y > self.size):
-            return Logger.error(f"the x and y positions must between 0~{self.size}.")
-        self._startPoint = (x, y)
 
     def action(self):
+        # print([i for i in range(self.size)])
         for i in range(self.size):
+            # print(i, end="")
+            # print(self.table[i])
             for j in range(self.size):
                 if self.table[i][j] <= 0:
                     continue
                 self.table[i][j]-=1
-
+        # print()
 
     
