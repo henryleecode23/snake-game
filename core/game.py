@@ -32,6 +32,7 @@ class Game():
         self.pointRespawn = False
         self.score = 0
         self.lastDirection = "RIGHT"
+        self.nextDirection = "RIGHT"
 
     def restart(self):
         self.size = 15
@@ -52,6 +53,7 @@ class Game():
         self.renderText:List[Text]
         self.pointRespawn = False
         self.score = 0
+        self.nextDirection = "RIGHT"
 
     def run(self):
         while True:
@@ -64,17 +66,18 @@ class Game():
                 if event.type == pygame.KEYDOWN:
                     keys = pygame.key.get_pressed()
                     if (keys[pygame.K_DOWN] or keys[pygame.K_s]) and self.direction != "UP":
-                        self.direction = "DOWN"
+                        self.nextDirection = "DOWN"
                     if (keys[pygame.K_UP] or keys[pygame.K_w])and self.direction != "DOWN":
-                        self.direction = "UP"
+                        self.nextDirection = "UP"
                     if (keys[pygame.K_LEFT] or keys[pygame.K_a])and self.direction != "RIGHT":
-                        self.direction = "LEFT"
+                        self.nextDirection = "LEFT"
                     if (keys[pygame.K_RIGHT] or keys[pygame.K_d])and self.direction != "LEFT":
-                        self.direction = "RIGHT"
+                        self.nextDirection = "RIGHT"
             
             self.actTime+=1
             if self.actTime >= self.moveTime:
                 self.gameMap.action()
+                self.direction = self.nextDirection
                 if self.direction == "UP":
                     self.position[0]-=1
                 elif self.direction == "DOWN":
